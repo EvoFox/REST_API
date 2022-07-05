@@ -17,20 +17,22 @@ exports.signUp = async (req, res) => {
 };
 
 // Read/Check if user exists
-exports.logIn = async (req, res) => {
+exports.login = async (req, res) => {
 	try {
 		// Search the database for the user provided email and password
-		const existingUser = await User.find(req.body);
+		const user = await User.findOne({
+			username: req.body.username,
+			pass: req.body.pass,
+		});
 
 		// Check the length of results
-		if (!existingUser.length) {
+		if (!user) {
 			// If existingUser is EMPTY:
-			console.log(`Invalid login details, please try again`);
-			res.send({ success: false, session_token: null });
+			throw new Error("Incorrect credentials");
 		} else {
 			// Otherwise, the login details are correct
 			console.log("Welcome back");
-			res.send({ success: true, session_token: getToken() });
+			res.send({ user });
 		}
 	} catch (error) {
 		console.log(error);
@@ -53,3 +55,4 @@ exports.searchUser = async (req, res) => {
 		res.send({ error });
 	}
 };
+
