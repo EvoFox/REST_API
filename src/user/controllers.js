@@ -19,20 +19,10 @@ exports.signUp = async (req, res) => {
 // Read/Check if user exists
 exports.login = async (req, res) => {
 	try {
-		// Search the database for the user provided email and password
-		const user = await User.findOne({
-			username: req.body.username,
-			pass: req.body.pass,
-		});
-
-		// Check the length of results
-		if (!user) {
-			// If existingUser is EMPTY:
-			throw new Error("Incorrect credentials");
-		} else {
-			// Otherwise, the login details are correct
-			console.log("Welcome back");
-			res.send({ user });
+		if (req.body.auth) {
+			// auth succeeded
+			console.log(`${req.body.username} has logged in`);
+			res.send({ user: req.body.username, session_token: "placeholder" });
 		}
 	} catch (error) {
 		console.log(error);
