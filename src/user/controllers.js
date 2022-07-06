@@ -46,3 +46,19 @@ exports.searchUser = async (req, res) => {
 	}
 };
 
+exports.changePassword = async (req, res) => {
+	try {
+		// search database for record matching provided request body, store it to variable
+		// Then set the password hashed by the middleware
+		const user = await User.updateOne(
+			{ $or: [{ username: req.body.username }, { email: req.body.email }] },
+			{ pass: req.body.newPass }
+		);
+
+		// send the result of the update command
+		res.send({ user });
+	} catch (error) {
+		console.log(error);
+		res.send({ error });
+	}
+};
