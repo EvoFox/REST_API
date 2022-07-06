@@ -8,4 +8,4 @@ userRouter.post("/login", comparePass, login); // define a get request on /log-i
 userRouter.post("/change-password", comparePass, hashPass, changePassword); // define a post request on /change-password endpoint that calls the changePassword controller
 userRouter.get("/search-user", searchUser); // define a get request on /search-user endpoint that calls the searchUser controller
 
-module.exports = { userRouter };
+module.exports = { userRouter }; // export the Router so that it can be used in the server
