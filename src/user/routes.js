@@ -5,7 +5,7 @@ const userRouter = Router(); // Create a Router that can have endpoints added to
 
 userRouter.post("/user", hashPass, signUp); // define a post request on /user endpoint that calls the signUp controller
 userRouter.post("/login", comparePass, login); // define a get request on /log-in endpoint that calls the logIn controller
-userRouter.post("/change-password", comparePass, hashPass, changePassword);
+userRouter.post("/change-password", comparePass, hashPass, changePassword); // define a post request on /change-password endpoint that calls the changePassword controller
 userRouter.get("/search-user", searchUser); // define a get request on /search-user endpoint that calls the searchUser controller
 
 module.exports = { userRouter };
