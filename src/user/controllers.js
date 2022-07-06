@@ -58,11 +58,11 @@ exports.changePassword = async (req, res) => {
 				{ $or: [{ username: req.body.username }, { email: req.body.email }] },
 				{ pass: req.body.newPass }
 			);
+			res.send({ user });
 		} else {
 			throw new Error("Invalid credentials");
 		}
 		// send the result of the update command
-		res.send({ user });
 	} catch (error) {
 		console.log(error);
 		res.send({ error });
@@ -75,6 +75,7 @@ exports.deleteUser = async (req, res) => {
 			const user = await User.deleteOne({
 				$or: [{ username: req.body.username }, { email: req.body.email }],
 			});
+			res.send({ user });
 		} else {
 			throw new Error("Invalid credentials");
 		}
