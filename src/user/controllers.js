@@ -23,6 +23,8 @@ exports.login = async (req, res) => {
 			// auth succeeded
 			console.log(`${req.body.username} has logged in`);
 			res.send({ user: req.body.username, session_token: "placeholder" });
+		} else {
+			throw new Error("Invalid credentials");
 		}
 	} catch (error) {
 		console.log(error);
@@ -56,9 +58,26 @@ exports.changePassword = async (req, res) => {
 				{ $or: [{ username: req.body.username }, { email: req.body.email }] },
 				{ pass: req.body.newPass }
 			);
+		} else {
+			throw new Error("Invalid credentials");
 		}
 		// send the result of the update command
 		res.send({ user });
+	} catch (error) {
+		console.log(error);
+		res.send({ error });
+	}
+};
+
+exports.deleteUser = async (req, res) => {
+	try {
+		if (req.body.auth) {
+			const user = await User.deleteOne({
+				$or: [{ username: req.body.username }, { email: req.body.email }],
+			});
+		} else {
+			throw new Error("Invalid credentials");
+		}
 	} catch (error) {
 		console.log(error);
 		res.send({ error });
