@@ -5,53 +5,58 @@ I undertook this project as part of a coding bootcamp, and it was an introductio
 ## Installation and running of this application
 
 ### Environment Variables:
-* `MONGO_URI`
-> This is your connection string to a Mongo Database.
-* `SECRET_KEY` 
-> This is your string to generate JSON Web Tokens for the GET /user endpoint 
-* `SALT`
-> This is an integer given to BCryptJS to encrypt passwords, I personally used 8 in the interest of speed over security
+
+- `MONGO_URI`
+  > This is your connection string to a Mongo Database.
+- `SECRET_KEY`
+  > This is your string to generate JSON Web Tokens for the GET /user endpoint
 
 ### Endpoints
-* `http://localhost:5001/user`
-    * POST
+
+- `http://localhost:5001/user`
+  - POST
     > Uses Request Body
+    >
     > ```json
     > {
-    >   "username": "username",
-	>   "email": "user@email.com",
-	>   "pass": "password"
+    > 	"username": "username",
+    > 	"email": "user@email.com",
+    > 	"pass": "password"
     > }
     > ```
-    * GET
+  - GET
     > Uses the HTML Request Authorization Header
-* `http://localhost:5001/login`
-    * POST
+- `http://localhost:5001/login`
+  - POST
     > Uses Request Body
+    >
     > ```json
     > {
-    >   "username": "username",
-	>   "pass": "password"
+    > 	"username": "username",
+    > 	"pass": "password"
     > }
     > ```
-* `http://localhost:5001/change-password`
-    * PUT
+- `http://localhost:5001/change-password`
+
+  - PUT
     > Uses Request Body
+    >
     > ```json
     > {
-    >   "username": "username",
-	>   "pass": "password",
-	>   "newPass": "new password",
+    > 	"username": "username",
+    > 	"pass": "password",
+    > 	"newPass": "new password"
     > }
     > ```
 
-* `http://localhost:5001/delete-account`
-    * DELETE
+- `http://localhost:5001/delete-account`
+  - DELETE
     > Uses Request Body
+    >
     > ```json
     > {
-    >   "username": "username",
-	>   "email": "user@email.com",
-	>   "pass": "password",
+    > 	"username": "username",
+    > 	"email": "user@email.com",
+    > 	"pass": "password"
     > }
     > ```
