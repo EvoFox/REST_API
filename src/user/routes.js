@@ -1,16 +1,15 @@
 const { Router } = require("express"); // Import Router method only from express
+const { signUp, login, changePassword, deleteUser } = require("./controllers"); // Import controllers from ./controllers
 const {
-	signUp,
-	login,
-	changePassword,
-	deleteUser,
-} = require("./controllers"); // Import controllers from ./controllers
-const { hashPass, comparePass, tokenCheck } = require("../middleware"); // Import middleware from ../middleware
+	hashPass,
+	comparePass,
+	tokenCheck,
+	verifyEmail,
+} = require("../middleware"); // Import middleware from ../middleware
 const userRouter = Router(); // Create a Router that can have endpoints added to it.
 
-
-userRouter.post("/user", hashPass, signUp); // define a post request on /user endpoint that calls the signUp controller
-userRouter.get("/user", tokenCheck, login) // define a get request on /user endpoint that calls the tokenCheck and login methods
+userRouter.post("/user", verifyEmail, hashPass, signUp); // define a post request on /user endpoint that calls the signUp controller
+userRouter.get("/user", tokenCheck, login); // define a get request on /user endpoint that calls the tokenCheck and login methods
 
 userRouter.post("/login", comparePass, login); // define a get request on /log-in endpoint that calls the logIn controller
 

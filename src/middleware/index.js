@@ -2,16 +2,30 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const _SALT = 8;
 const User = require("../user/model");
+
+exports.verifyEmail = async (req, res, next) => {
+	try {
+		// Regex checks for email format
+		if (req.body.email.test(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+			// Email is valid
+			next();
+		} else {
+			throw new Error("Invalid email format.");
+		}
+	} catch (error) {
+		console.log(error);
+		res.send({ error });
+	}
+};
 
 exports.hashPass = async (req, res, next) => {
 	try {
-		req.body.pass = await bcrypt.hash(req.body.pass, _SALT); // Hash the password from req.body.pass, reasserting into req.body.pass
+		req.body.pass = await bcrypt.hash(req.body.pass, process.env.SALT); // Hash the password from req.body.pass, reasserting into req.body.pass
 
 		// If changing password:
 		if (req.body.newPass) {
-			req.user.newPass = await bcrypt.hash(req.body.newPass, _SALT); // Hash the password from req.body.newPass if it exists, reassert into req.body.newPass
+			req.user.newPass = await bcrypt.hash(req.body.newPass, process.env.SALT); // Hash the password from req.body.newPass if it exists, reassert into req.body.newPass
 		}
 
 		next(); // Moves onto next middleware/controller in endpoint
