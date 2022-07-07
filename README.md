@@ -9,6 +9,8 @@ I undertook this project as part of a coding bootcamp, and it was an introductio
 > This is your connection string to a Mongo Database.
 * `SECRET_KEY` 
 > This is your string to generate JSON Web Tokens for the GET /user endpoint 
+* `SALT`
+> This is an integer given to BCryptJS to encrypt passwords, I personally used 8 in the interest of speed over security
 
 ### Endpoints
 * `http://localhost:5001/user`
