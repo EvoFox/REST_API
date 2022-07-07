@@ -48,7 +48,8 @@ exports.tokenCheck = async (req, res, next) => {
 		);
 
 		// Find user by their ID stored in the token
-		req.user = User.findById(decodedToken.id);
+		req.user = await User.findById(decodedToken.id);
+		console.log(req.user);
 		next();
 	} catch (error) {
 		console.log(error);
