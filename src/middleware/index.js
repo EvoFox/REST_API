@@ -3,12 +3,14 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const User = require("../user/model");
-
+const SALT = 8
 exports.verifyEmail = async (req, res, next) => {
 	try {
+		const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 		// Regex checks for email format
-		if (req.body.email.test(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+		if (regex.test(req.body.email)) {
 			// Email is valid
+			console.log(req.body.email);
 			next();
 		} else {
 			throw new Error("Invalid email format.");
@@ -21,11 +23,11 @@ exports.verifyEmail = async (req, res, next) => {
 
 exports.hashPass = async (req, res, next) => {
 	try {
-		req.body.pass = await bcrypt.hash(req.body.pass, process.env.SALT); // Hash the password from req.body.pass, reasserting into req.body.pass
+		req.body.pass = await bcrypt.hash(req.body.pass, SALT); // Hash the password from req.body.pass, reasserting into req.body.pass
 
 		// If changing password:
 		if (req.body.newPass) {
-			req.user.newPass = await bcrypt.hash(req.body.newPass, process.env.SALT); // Hash the password from req.body.newPass if it exists, reassert into req.body.newPass
+			req.user.newPass = await bcrypt.hash(req.body.newPass, SALT); // Hash the password from req.body.newPass if it exists, reassert into req.body.newPass
 		}
 
 		next(); // Moves onto next middleware/controller in endpoint
