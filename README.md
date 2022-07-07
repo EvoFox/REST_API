@@ -12,7 +12,7 @@ I undertook this project as part of a coding bootcamp, and it was an introductio
 
 ### Endpoints
 * `http://localhost:5001/user`
-    * GET
+    * POST
     > Uses Request Body
     > ```json
     > {
@@ -21,7 +21,7 @@ I undertook this project as part of a coding bootcamp, and it was an introductio
 	>   "pass": "password"
     > }
     > ```
-    * POST
+    * GET
     > Uses the HTML Request Authorization Header
 * `http://localhost:5001/login`
     * POST
