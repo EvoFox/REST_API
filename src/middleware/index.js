@@ -10,7 +10,6 @@ exports.verifyEmail = async (req, res, next) => {
 		// Regex checks for email format
 		if (regex.test(req.body.email)) {
 			// Email is valid
-			console.log(req.body.email);
 			next();
 		} else {
 			throw new Error("Invalid email format.");
@@ -65,10 +64,11 @@ exports.tokenCheck = async (req, res, next) => {
 
 		// Find user by their ID stored in the token
 		req.user = await User.findById(decodedToken.id);
-		console.log(req.user);
+
 		next();
 	} catch (error) {
 		console.log(error);
 		res.send({ error });
 	}
 };
+
