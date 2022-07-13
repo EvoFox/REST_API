@@ -9,9 +9,9 @@ const {
 const userRouter = Router(); // Create a Router that can have endpoints added to it.
 
 userRouter.post("/user", verifyEmail, hashPass, signUp); // define a post request on /user endpoint that calls the signUp controller
-userRouter.get("/user", tokenCheck, login); // define a get request on /user endpoint that calls the tokenCheck and login methods
 
 userRouter.post("/login", comparePass, login); // define a get request on /log-in endpoint that calls the logIn controller
+userRouter.get("/login", tokenCheck, login); // define a get request on /user endpoint that calls the tokenCheck and login methods
 
 userRouter.put("/change-password", comparePass, hashPass, changePassword); // define a post request on /change-password endpoint that calls the changePassword controller
 
