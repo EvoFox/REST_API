@@ -15,6 +15,6 @@ userRouter.get("/login", tokenCheck, login); // define a get request on /user en
 
 userRouter.put("/change-password", comparePass, hashPass, changePassword); // define a post request on /change-password endpoint that calls the changePassword controller
 
-userRouter.delete("/delete-account", comparePass, deleteUser); // define a delete request on /delete-account endpoint that calls the deleteUser controller
+userRouter.delete("/delete-account", tokenCheck, deleteUser); // define a delete request on /delete-account endpoint that calls the deleteUser controller
 
 module.exports = { userRouter }; // export the Router so that it can be used in the server
